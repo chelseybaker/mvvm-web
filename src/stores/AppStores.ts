@@ -1,8 +1,8 @@
+import OpenWeatherNetworker from "../network/openWeather/OpenWeatherNetworker";
 import WeatherStore from "./WeatherStore";
-import Networker from "../network/Networker";
 
 class AppStores {
-  static readonly weatherStore = new WeatherStore(new Networker());
+  static readonly weatherStore = new WeatherStore(new OpenWeatherNetworker());
 }
 
 export default AppStores;

@@ -1,11 +1,15 @@
 import React from "react";
 import "./App.css";
-import WeatherView from "./components/weatherView/WeatherView";
+import CounterView from "./components/counter/CounterView";
+import CurrentLocationWeatherView from "./components/currentLocationWeather/CurrentLocationWeatherView";
+import ZipCodeWeatherView from "./components/zipCodeWeather/ZipCodeWeatherView";
 
 function App() {
   return (
     <div className="App">
-      <WeatherView />
+      <ZipCodeWeatherView />
+      <CurrentLocationWeatherView />
+      <CounterView />
     </div>
   );
 }

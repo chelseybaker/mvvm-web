@@ -1,8 +1,9 @@
 type Weather = {
-  name: string;
-  main: {
-    temp: number;
+  temperature: {
+    fahrenheit: number;
+    celsius: number;
   };
+  city: string;
 };
 
 export default Weather;

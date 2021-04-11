@@ -1,10 +1,10 @@
-import ViewModel from "./viewModel";
+import ViewModel from "./ViewModel";
 import AppStores from "../../stores/AppStores";
-import View from "./view";
+import View from "./View";
 
-const WeatherView = () => {
+const ZipCodeWeatherView = () => {
   const viewModel = new ViewModel(AppStores.weatherStore);
   return <View viewModel={viewModel} />;
 };
 
-export default WeatherView;
+export default ZipCodeWeatherView;
