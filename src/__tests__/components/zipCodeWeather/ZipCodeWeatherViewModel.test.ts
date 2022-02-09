@@ -1,19 +1,19 @@
-import ViewModel from "../../../components/zipCodeWeather/ViewModel";
+import ZipCodeWeatherViewModel from "../../../components/zipCodeWeather/ZipCodeWeatherViewModel";
 import MockWeather from "../../mocks/MockWeather";
 import MockWeatherStore from "../../mocks/MockWeatherStore";
 
-describe("ZipCodeWeather ViewModel tests", () => {
-  let viewModel: ViewModel;
+describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
+  let viewModel: ZipCodeWeatherViewModel;
   let mockWeatherStore: MockWeatherStore;
 
   beforeEach(() => {
     mockWeatherStore = new MockWeatherStore();
-    viewModel = new ViewModel(mockWeatherStore);
+    viewModel = new ZipCodeWeatherViewModel(mockWeatherStore);
   });
 
   describe("On init", () => {
     it("should have the 'Enter a zip' direction", () => {
-      expect(viewModel.temperatureLabel).toEqual("Enter a zip code.");
+      expect(viewModel.temperatureLabel).toEqual("Enter a zip code: ");
     });
 
     it("should disable the weatherButton since no zip is entered", () => {

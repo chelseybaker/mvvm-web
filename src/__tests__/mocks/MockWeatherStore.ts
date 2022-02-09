@@ -3,7 +3,7 @@ import WeatherStorable from "../../stores/WeatherStorable";
 import MockWeather from "./MockWeather";
 
 class MockWeatherStore implements WeatherStorable {
-  locationWeather?: Weather;
+  currentLocationWeather?: Weather;
 
   getWeatherForLocationPromise = Promise.resolve(undefined);
   getWeatherForZipPromise = Promise.resolve(MockWeather);

@@ -1,44 +1,46 @@
 import CurrentWeatherResponse from "../network/openWeather/CurrentWeatherResponse";
-import OpenWeatherNetworkable, {NetworkResponse} from "../network/OpenWeatherNetworkable";
+import OpenWeatherNetworkable, {NetworkResponse} from "../network/openWeather/OpenWeatherNetworkable";
 import WeatherStorable from "./WeatherStorable";
 import Weather from "../models/Weather";
-import {makeAutoObservable} from "mobx";
+import {action, makeObservable, observable, runInAction} from "mobx";
 
 class WeatherStore implements WeatherStorable {
-  /** @observable */
-  locationWeather?: Weather;
+  @observable currentLocationWeather?: Weather;
   private readonly networker: OpenWeatherNetworkable;
 
   constructor(networker: OpenWeatherNetworkable) {
+    makeObservable(this);
     this.networker = networker;
-    makeAutoObservable(this);
   }
 
   getWeatherForZip(zipCode: string): Promise<Weather> {
-    return this.networker.getWeatherForZip(zipCode).then((response) => Promise.resolve(this.weatherReducer(response)));
+    return this.networker
+      .getWeatherForZip(zipCode)
+      .then((response) => Promise.resolve(this.transformWeatherResponse(response)));
   }
 
-  /** @action */
   getWeatherForLocation(longitude: number, latitude: number): Promise<void> {
-    return this.networker.getWeatherFoCoordinates(longitude, latitude).then((response) => {
-      this.locationWeather = this.weatherReducer(response);
-      return Promise.resolve();
-    });
+    return this.networker
+      .getWeatherForCoordinates(longitude, latitude)
+      .then((response) => {
+        this.updateCurrentWeatherLocation(this.transformWeatherResponse(response));
+        return Promise.resolve();
+      })
+      .catch(() => Promise.reject(new Error("A network error occurred")));
   }
 
-  private weatherReducer = (response: NetworkResponse<CurrentWeatherResponse>): Weather => {
+  @action private updateCurrentWeatherLocation(weather?: Weather): void {
+    this.currentLocationWeather = weather;
+  }
+
+  private transformWeatherResponse(response: NetworkResponse<CurrentWeatherResponse>): Weather {
     const kelvin = response.data.main.temp;
-    const fahrenheit = Math.floor(((kelvin - 273.15) * 9) / 5 + 32);
     const celsius = Math.floor(kelvin - 273.15);
-    const weather: Weather = {
-      temperature: {
-        fahrenheit: fahrenheit,
-        celsius: celsius,
-      },
+    return {
+      temperature: celsius,
       city: response.data.name,
     };
-    return weather;
-  };
+  }
 }
 
 export default WeatherStore;

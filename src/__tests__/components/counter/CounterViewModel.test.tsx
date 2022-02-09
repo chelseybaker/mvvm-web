@@ -47,8 +47,11 @@ beforeEach(() => {
   viewModel = new ViewModel(mockDocument);
 });
 
-it("has initial labels", () => {
+it("has appropriate initial label", () => {
   expect(viewModel.countLabel).toEqual("You clicked 0 times");
+});
+
+it("has the starting title as the document", () => {
   expect(mockDocument.title).toEqual("You clicked 0 times");
 });
 
@@ -57,8 +60,11 @@ describe("when clicked", () => {
     viewModel.onClick();
   });
 
-  it("can update the counter labels", () => {
+  it("updates the counter label", () => {
     expect(viewModel.countLabel).toEqual("You clicked 1 times");
+  });
+
+  it("updates the document title", () => {
     expect(mockDocument.title).toEqual("You clicked 1 times");
   });
 });

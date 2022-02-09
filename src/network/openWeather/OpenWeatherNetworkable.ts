@@ -1,4 +1,4 @@
-import CurrentWeatherResponse from "./openWeather/CurrentWeatherResponse";
+import CurrentWeatherResponse from "./CurrentWeatherResponse";
 
 export type NetworkResponse<T> = {
   data: T; // The data object we'd like to use
@@ -9,7 +9,7 @@ export type NetworkPromise<T> = Promise<NetworkResponse<T>>;
 
 interface OpenWeatherNetworkable {
   getWeatherForZip(zipCode: string): NetworkPromise<CurrentWeatherResponse>;
-  getWeatherFoCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse>;
+  getWeatherForCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse>;
 }
 
 export default OpenWeatherNetworkable;

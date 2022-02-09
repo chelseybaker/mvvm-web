@@ -15,3 +15,10 @@ Run `yarn dev` to start the app and view it at `http://localhost:3000/`.
 
 ## Running tests
 Run `yarn test` to run all tests and view coverage. 
+
+## TODO
+- [x] Create an App Provider with an `AppViewModel` (actually call it main screen or something)
+- [ ] Lay out the App CurrentLocationWeatherView and make it look nice
+- [x] Remove the individual view providers
+- [x] Switch to decorators
+- [ ] Maybe add a second page

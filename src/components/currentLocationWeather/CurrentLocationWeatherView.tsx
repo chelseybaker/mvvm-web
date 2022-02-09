@@ -1,10 +1,15 @@
-import ViewModel from "./ViewModel";
-import AppStores from "../../stores/AppStores";
-import View from "./View";
+import CurrentLocationWeatherViewModel from "./CurrentLocationWeatherViewModel";
+import {observer} from "mobx-react";
 
-const CurrentLocationWeatherView = () => {
-  const viewModel = new ViewModel(AppStores.weatherStore, navigator.geolocation);
-  return <View viewModel={viewModel} />;
-};
+interface Props {
+  viewModel: CurrentLocationWeatherViewModel;
+}
 
-export default CurrentLocationWeatherView;
+const CurrentLocationWeatherView = ({viewModel}: Props) => (
+  <div>
+    <button onClick={viewModel.getLocation}>Get Weather for Location</button>
+    <p>{viewModel.locationTemperature}</p>
+  </div>
+);
+
+export default observer(CurrentLocationWeatherView);

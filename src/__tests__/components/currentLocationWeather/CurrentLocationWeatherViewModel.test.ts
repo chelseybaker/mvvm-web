@@ -2,17 +2,17 @@ import _ from "lodash";
 import MockGeoLocator from "../../mocks/MockGeoLocator";
 import MockWeather from "../../mocks/MockWeather";
 import MockWeatherStore from "../../mocks/MockWeatherStore";
-import ViewModel from "../../../components/currentLocationWeather/ViewModel";
+import CurrentLocationWeatherViewModel from "../../../components/currentLocationWeather/CurrentLocationWeatherViewModel";
 
 describe("CurrentLocationWeather viewModel tests", () => {
-  let viewModel: ViewModel;
+  let viewModel: CurrentLocationWeatherViewModel;
   let mockGeoLocator: MockGeoLocator;
   let mockWeatherStore: MockWeatherStore;
 
   beforeEach(() => {
     mockGeoLocator = new MockGeoLocator();
     mockWeatherStore = new MockWeatherStore();
-    viewModel = new ViewModel(mockWeatherStore, mockGeoLocator);
+    viewModel = new CurrentLocationWeatherViewModel(mockWeatherStore, mockGeoLocator);
   });
 
   describe("On init", () => {
@@ -21,10 +21,10 @@ describe("CurrentLocationWeather viewModel tests", () => {
     });
   });
 
-  describe("Given locationWeather on weatherStore is updated", () => {
+  describe("Given currentLocationWeather on weatherStore is updated", () => {
     beforeEach(() => {
       const mockWeather = _.cloneDeep(MockWeather);
-      mockWeatherStore.locationWeather = mockWeather;
+      mockWeatherStore.currentLocationWeather = mockWeather;
     });
 
     it("should recompute the label", () => {

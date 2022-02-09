@@ -1,7 +1,11 @@
-import OpenWeatherNetwork, {NetworkPromise} from "../OpenWeatherNetworkable";
+import OpenWeatherNetwork, {NetworkPromise} from "./OpenWeatherNetworkable";
 import axios from "axios";
 import CurrentWeatherResponse from "./CurrentWeatherResponse";
 
+/**
+ * This class should exclusively be API call definitions and data
+ * No other logic (data transformations, type checks, etc.) should happen here
+ */
 class OpenWeatherNetworker implements OpenWeatherNetwork {
   private readonly apiKey: string;
   private readonly baseUrl: string;

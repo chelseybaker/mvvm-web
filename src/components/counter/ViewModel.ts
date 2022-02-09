@@ -1,19 +1,21 @@
+import {action, computed, observable} from "mobx";
+
 class ViewModel {
-  private count = 0;
+  @observable private count = 0;
   private document: Document;
+
   constructor(document: Document) {
     this.document = document;
     this.document.title = `You clicked ${this.count} times`;
   }
 
-  onClick = (): void => {
+  @action onClick = (): void => {
     this.count += 1;
+    this.document.title = `You clicked ${this.count} times`;
   };
 
-  get countLabel(): string {
-    const label = `You clicked ${this.count} times`;
-    this.document.title = label;
-    return label;
+  @computed get countLabel(): string {
+    return `You clicked ${this.count} times`;
   }
 }
 export default ViewModel;

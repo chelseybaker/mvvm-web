@@ -1,4 +1,4 @@
-import {GeoLocator} from "../../components/currentLocationWeather/ViewModel";
+import {GeoLocator} from "../../components/currentLocationWeather/CurrentLocationWeatherViewModel";
 
 class MockGeoLocator implements GeoLocator {
   getCurrentPosition = (success: (position: GeolocationPosition) => void, errorCallback?: PositionErrorCallback) => {
