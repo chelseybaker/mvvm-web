@@ -1,4 +1,4 @@
-import OpenWeatherNetwork, {NetworkPromise} from "./OpenWeatherNetworkable";
+import OpenWeatherNetworkable, {NetworkPromise} from "./OpenWeatherNetworkable";
 import axios from "axios";
 import CurrentWeatherResponse from "./CurrentWeatherResponse";
 
@@ -6,7 +6,7 @@ import CurrentWeatherResponse from "./CurrentWeatherResponse";
  * This class should exclusively be API call definitions and data
  * No other logic (data transformations, type checks, etc.) should happen here
  */
-class OpenWeatherNetworker implements OpenWeatherNetwork {
+class OpenWeatherNetworker implements OpenWeatherNetworkable {
   private readonly apiKey: string;
   private readonly baseUrl: string;
 
@@ -22,7 +22,7 @@ class OpenWeatherNetworker implements OpenWeatherNetwork {
     return axios.get(`${this.baseUrl}/weather?zip=${zipCode}&appid=${this.apiKey}`);
   }
 
-  getWeatherFoCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse> {
+  getWeatherForCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse> {
     return axios.get(`${this.baseUrl}/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`);
   }
 }
