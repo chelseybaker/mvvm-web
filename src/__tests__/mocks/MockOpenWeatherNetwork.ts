@@ -3,13 +3,13 @@ import OpenWeatherNetworkable, {NetworkPromise} from "../../network/openWeather/
 import MockCurrentWeatherResponse from "./MockCurrentWeatherResponse";
 
 class MockOpenWeatherNetwork implements OpenWeatherNetworkable {
-  getWeatherForCoordinates = (longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse> => {
+  getWeatherForCoordinates(params: {lon: number; lat: number}): NetworkPromise<CurrentWeatherResponse> {
     return Promise.resolve({status: 200, data: MockCurrentWeatherResponse});
-  };
+  }
 
-  getWeatherForZip = (zipCode: string): NetworkPromise<CurrentWeatherResponse> => {
+  getWeatherForZip(params: {zip: string}): NetworkPromise<CurrentWeatherResponse> {
     return Promise.resolve({status: 200, data: MockCurrentWeatherResponse});
-  };
+  }
 }
 
 export default MockOpenWeatherNetwork;

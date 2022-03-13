@@ -35,8 +35,8 @@
 
 import ReactDOM from "react-dom";
 import {act} from "react-dom/test-utils";
-import CounterView from "../../../components/counter/CounterView";
-import ViewModel from "../../../components/counter/ViewModel";
+import CounterView from "./CounterView";
+import ViewModel from "./ViewModel";
 
 let viewModel: ViewModel;
 let mockDocument: Document;

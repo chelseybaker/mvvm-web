@@ -18,12 +18,12 @@ class OpenWeatherNetworker implements OpenWeatherNetworkable {
     this.apiKey = apiKey;
   }
 
-  getWeatherForZip(zipCode: string): NetworkPromise<CurrentWeatherResponse> {
-    return axios.get(`${this.baseUrl}/weather?zip=${zipCode}&appid=${this.apiKey}`);
+  getWeatherForZip(params: {zip: string}): NetworkPromise<CurrentWeatherResponse> {
+    return axios.get(`${this.baseUrl}/weather`, {params: {...params, appid: this.apiKey}});
   }
 
-  getWeatherForCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse> {
-    return axios.get(`${this.baseUrl}/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`);
+  getWeatherForCoordinates(params: {lon: number; lat: number}): NetworkPromise<CurrentWeatherResponse> {
+    return axios.get(`${this.baseUrl}/weather`, {params: {...params, appid: this.apiKey}});
   }
 }
 

@@ -18,10 +18,16 @@ class WeatherStore implements WeatherStorable {
   }
 
   getWeatherForLocation(longitude: number, latitude: number): Promise<void> {
-    return this.dataTransformer.getWeatherForCoordinates(longitude, latitude).then((weather) => {
-      this.updateCurrentWeatherLocation(weather);
-      return Promise.resolve();
-    });
+    return this.dataTransformer
+      .getWeatherForCoordinates(longitude, latitude)
+      .then((weather) => {
+        this.updateCurrentWeatherLocation(weather);
+        return Promise.resolve();
+      })
+      .catch((error) => {
+        this.updateCurrentWeatherLocation(undefined);
+        return Promise.reject(error);
+      });
   }
 
   @action private updateCurrentWeatherLocation(weather?: Weather): void {

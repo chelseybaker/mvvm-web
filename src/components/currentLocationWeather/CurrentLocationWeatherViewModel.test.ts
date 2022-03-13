@@ -1,8 +1,8 @@
 import _ from "lodash";
-import MockGeoLocator from "../../mocks/MockGeoLocator";
-import MockWeather from "../../mocks/MockWeather";
-import MockWeatherStore from "../../mocks/MockWeatherStore";
-import CurrentLocationWeatherViewModel from "../../../components/currentLocationWeather/CurrentLocationWeatherViewModel";
+import MockGeoLocator from "../../__tests__/mocks/MockGeoLocator";
+import MockWeather from "../../__tests__/mocks/MockWeather";
+import MockWeatherStore from "../../__tests__/mocks/MockWeatherStore";
+import CurrentLocationWeatherViewModel from "./CurrentLocationWeatherViewModel";
 
 describe("CurrentLocationWeather viewModel tests", () => {
   let viewModel: CurrentLocationWeatherViewModel;

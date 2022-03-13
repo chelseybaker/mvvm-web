@@ -1,15 +1,8 @@
+import {isLocalError, NetworkError, UnexpectedDataFormatError} from "../../errors/LocalErrors";
 import Weather from "../../models/Weather";
 import CurrentWeatherResponse, {isCurrentWeatherResponse} from "./CurrentWeatherResponse";
 import OpenWeatherDataTransformable from "./OpenWeatherDataTransformable";
 import OpenWeatherNetworkable, {NetworkResponse} from "./OpenWeatherNetworkable";
-
-const NetworkError = {
-  message: "Data is in an unexpected format",
-};
-
-const UnexpectedDataFormatError = {
-  message: "Data is in an unexpected format",
-};
 
 class OpenWeatherDataTransformer implements OpenWeatherDataTransformable {
   private readonly networker: OpenWeatherNetworkable;
@@ -19,27 +12,27 @@ class OpenWeatherDataTransformer implements OpenWeatherDataTransformable {
 
   getWeatherForZip(zipCode: string): Promise<Weather> {
     return this.networker
-      .getWeatherForZip(zipCode)
+      .getWeatherForZip({zip: zipCode})
       .then((response) => this.processCurrentWeatherResponse(response))
-      .catch(() => Promise.reject(NetworkError));
+      .catch((error) => this.processCurrentWeatherError(error));
   }
 
   getWeatherForCoordinates(longitude: number, latitude: number): Promise<Weather> {
     return this.networker
-      .getWeatherForCoordinates(longitude, latitude)
+      .getWeatherForCoordinates({lon: longitude, lat: latitude})
       .then((response) => this.processCurrentWeatherResponse(response))
-      .catch(() => Promise.reject(NetworkError));
+      .catch((error) => this.processCurrentWeatherError(error));
   }
 
   private processCurrentWeatherResponse(response: NetworkResponse<CurrentWeatherResponse>): Promise<Weather> {
     // 1. Verify the response is in the format we expect. If not, return a rejected promise with an error explaining
-    if (!isCurrentWeatherResponse(response)) {
+    if (!isCurrentWeatherResponse(response.data)) {
       return Promise.reject(UnexpectedDataFormatError);
     }
 
     // 2. Translate the Kelvin temperature into Celsius
     const kelvin = response.data.main.temp;
-    const celsius = Math.floor(kelvin - 273.15);
+    const celsius = Math.round(kelvin - 273.15);
     // 3. Create a Weather object
     const weather: Weather = {
       temperature: celsius,
@@ -47,6 +40,11 @@ class OpenWeatherDataTransformer implements OpenWeatherDataTransformable {
     };
     // 4. Resolve the promise with the weather object
     return Promise.resolve(weather);
+  }
+
+  private processCurrentWeatherError(error: Error): Promise<never> {
+    if (isLocalError(error)) return Promise.reject(error);
+    return Promise.reject(NetworkError);
   }
 }
 

@@ -8,8 +8,8 @@ export type NetworkResponse<T> = {
 export type NetworkPromise<T> = Promise<NetworkResponse<T>>;
 
 interface OpenWeatherNetworkable {
-  getWeatherForZip(zipCode: string): NetworkPromise<CurrentWeatherResponse>;
-  getWeatherForCoordinates(longitude: number, latitude: number): NetworkPromise<CurrentWeatherResponse>;
+  getWeatherForZip(params: {zip: string}): NetworkPromise<CurrentWeatherResponse>;
+  getWeatherForCoordinates(params: {lon: number; lat: number}): NetworkPromise<CurrentWeatherResponse>;
 }
 
 export default OpenWeatherNetworkable;

@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --collectCoverageFrom='[\"src/components/**/*.ts\",\"src/stores/**/*.ts\"]' --testMatch '**/*.test.ts' --watchAll=false",
+    "test": "react-scripts test --coverage --collectCoverageFrom='[\"src/components/**/*.ts\",\"src/network/**/*.ts\",\"src/pages/**/*.ts\",\"src/stores/**/*.ts\",\"src/utilities/**/*.ts\"]' --testMatch '**/*.test.ts' --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -1,6 +1,6 @@
-import ZipCodeWeatherViewModel from "../../../components/zipCodeWeather/ZipCodeWeatherViewModel";
-import MockWeather from "../../mocks/MockWeather";
-import MockWeatherStore from "../../mocks/MockWeatherStore";
+import ZipCodeWeatherViewModel from "./ZipCodeWeatherViewModel";
+import MockWeather from "../../__tests__/mocks/MockWeather";
+import MockWeatherStore from "../../__tests__/mocks/MockWeatherStore";
 
 describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
   let viewModel: ZipCodeWeatherViewModel;
