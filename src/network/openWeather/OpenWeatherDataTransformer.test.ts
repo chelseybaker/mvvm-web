@@ -1,13 +1,13 @@
-import MockOpenWeatherNetwork from "../../__tests__/mocks/MockOpenWeatherNetwork";
+import MockOpenWeatherNetworker from "../../__tests__/mocks/MockOpenWeatherNetworker";
 import {LocalError, LocalErrorCode, NetworkError} from "../../errors/LocalErrors";
 import OpenWeatherDataTransformer from "./OpenWeatherDataTransformer";
 
 describe("OpenWeatherDataTransformer tests", () => {
   let dataTransformer: OpenWeatherDataTransformer;
-  let mockNetworker: MockOpenWeatherNetwork;
+  let mockNetworker: MockOpenWeatherNetworker;
 
   beforeEach(() => {
-    mockNetworker = new MockOpenWeatherNetwork();
+    mockNetworker = new MockOpenWeatherNetworker();
     dataTransformer = new OpenWeatherDataTransformer(mockNetworker);
   });
 

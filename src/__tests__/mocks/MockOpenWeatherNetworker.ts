@@ -2,7 +2,7 @@ import CurrentWeatherResponse from "../../network/openWeather/CurrentWeatherResp
 import OpenWeatherNetworkable, {NetworkPromise} from "../../network/openWeather/OpenWeatherNetworkable";
 import MockCurrentWeatherResponse from "./MockCurrentWeatherResponse";
 
-class MockOpenWeatherNetwork implements OpenWeatherNetworkable {
+class MockOpenWeatherNetworker implements OpenWeatherNetworkable {
   getWeatherForCoordinates(params: {lon: number; lat: number}): NetworkPromise<CurrentWeatherResponse> {
     return Promise.resolve({status: 200, data: MockCurrentWeatherResponse});
   }
@@ -12,4 +12,4 @@ class MockOpenWeatherNetwork implements OpenWeatherNetworkable {
   }
 }
 
-export default MockOpenWeatherNetwork;
+export default MockOpenWeatherNetworker;

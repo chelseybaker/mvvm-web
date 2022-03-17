@@ -1,3 +1,6 @@
+// Example used in a blogpost
+// https://www.detroitlabs.com/blog/2021/06/25/intro-to-mvvm-in-react-with-mobx/
+
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 // import { act } from 'react-dom/test-utils';
@@ -33,9 +36,6 @@
 //   expect(document.title).toBe("You clicked 1 times");
 // });
 
-import ReactDOM from "react-dom";
-import {act} from "react-dom/test-utils";
-import CounterView from "./CounterView";
 import ViewModel from "./ViewModel";
 
 let viewModel: ViewModel;
