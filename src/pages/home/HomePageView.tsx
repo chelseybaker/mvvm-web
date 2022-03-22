@@ -8,7 +8,7 @@ interface Props {
 }
 
 const HomePageView = ({viewModel}: Props) => (
-  <div>
+  <div className={"stacked"}>
     <ZipCodeWeatherView viewModel={viewModel.zipCodeViewModel} />
     <CurrentLocationWeatherView viewModel={viewModel.currentLocationViewModel} />
   </div>

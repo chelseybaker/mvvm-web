@@ -4,7 +4,10 @@ import WeatherStorable from "../../stores/WeatherStorable";
 import {convertCelsiusToFahrenheit} from "../../utilities/TemperatureConverter";
 
 class ZipCodeWeatherViewModel {
-  @observable temperatureLabel = "Enter a zip code: ";
+  readonly temperatureLabel = "Enter a zip code: ";
+  readonly actionButtonText = "Search";
+
+  @observable weatherInformation = "[Search a zip to see its weather]";
 
   @observable private zipcode?: string;
 
@@ -37,11 +40,11 @@ class ZipCodeWeatherViewModel {
   /** Updates the temperatureLabel */
   @action private updateTemperature = (weather?: Weather): void => {
     if (!weather) {
-      this.temperatureLabel = "Error getting temperature";
+      this.weatherInformation = "Error getting temperature";
       return;
     }
     const fahrenheit = convertCelsiusToFahrenheit(weather.temperature);
-    this.temperatureLabel = `It is ${fahrenheit}°F / ${weather.temperature}°C in ${weather.city}.`;
+    this.weatherInformation = `It is ${fahrenheit}°F / ${weather.temperature}°C in ${weather.city}.`;
   };
 }
 

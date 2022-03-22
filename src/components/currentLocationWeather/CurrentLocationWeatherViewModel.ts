@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction} from "mobx";
 import WeatherStorable from "../../stores/WeatherStorable";
 import {convertCelsiusToFahrenheit} from "../../utilities/TemperatureConverter";
 
@@ -8,6 +8,7 @@ export interface GeoLocator {
 
 class CurrentLocationWeatherViewModel {
   private locationPermissionDenied?: boolean;
+  private loading: boolean = false;
 
   private readonly weatherStore: WeatherStorable;
   private readonly geoLocator: GeoLocator;
@@ -19,21 +20,30 @@ class CurrentLocationWeatherViewModel {
   }
 
   get locationTemperature(): string {
-    if (this.locationPermissionDenied) return "Location permission denied";
+    if (this.loading) return "[Loading]";
+    if (this.locationPermissionDenied) return "[Location permission denied]";
 
     const weather = this.weatherStore.currentLocationWeather;
-    if (!weather) return "Location weather not loaded";
+    if (!weather) return "[Location weather not loaded]";
 
     const fahrenheit = convertCelsiusToFahrenheit(weather.temperature);
     return `It is ${fahrenheit}°F / ${weather.temperature}°C in ${weather.city}.`;
   }
 
-  getLocation = (): void => {
+  readonly getLocation = (): void => {
+    if (this.locationPermissionDenied) return;
+    this.loading = true;
     this.geoLocator.getCurrentPosition(
       (position) => {
-        this.weatherStore.getWeatherForLocation(position.coords.longitude, position.coords.latitude).finally();
+        this.weatherStore
+          .getWeatherForLocation(position.coords.longitude, position.coords.latitude)
+          .finally(() => runInAction(() => (this.loading = false)));
       },
-      () => (this.locationPermissionDenied = true)
+      () =>
+        runInAction(() => {
+          this.locationPermissionDenied = true;
+          this.loading = false;
+        })
     );
   };
 }

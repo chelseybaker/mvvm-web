@@ -17,7 +17,7 @@ describe("CurrentLocationWeather viewModel tests", () => {
 
   describe("On init", () => {
     it("should have the initial locationTemperature label", () => {
-      expect(viewModel.locationTemperature).toEqual("Location weather not loaded");
+      expect(viewModel.locationTemperature).toEqual("[Location weather not loaded]");
     });
   });
 
@@ -58,7 +58,7 @@ describe("CurrentLocationWeather viewModel tests", () => {
       });
 
       it("should re calculate the locationTemperature", () => {
-        expect(viewModel.locationTemperature).toEqual("Location permission denied");
+        expect(viewModel.locationTemperature).toEqual("[Location permission denied]");
       });
     });
   });

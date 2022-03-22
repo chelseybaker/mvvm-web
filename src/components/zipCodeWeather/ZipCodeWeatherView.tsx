@@ -6,13 +6,16 @@ interface Props {
 }
 
 const ZipCodeWeatherView = ({viewModel}: Props) => (
-  <div>
-    <span>{viewModel.temperatureLabel}</span>
-    <input onChange={(e) => viewModel.onChangeZipCode(e.target.value)} />
-    <button disabled={viewModel.buttonDisabled} onClick={viewModel.onClickGetWeather}>
-      Search
-    </button>
-  </div>
+  <>
+    <div className={"mb-1"}>
+      <span>{viewModel.temperatureLabel}</span>
+      <input onChange={(e) => viewModel.onChangeZipCode(e.target.value)} />
+      <button disabled={viewModel.buttonDisabled} onClick={viewModel.onClickGetWeather}>
+        {viewModel.actionButtonText}
+      </button>
+    </div>
+    <div>{viewModel.weatherInformation}</div>
+  </>
 );
 
 export default observer(ZipCodeWeatherView);

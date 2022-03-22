@@ -38,7 +38,7 @@ describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
         });
 
         it("should have a new temperatureLabel", () => {
-          expect(viewModel.temperatureLabel).toEqual("It is 70°F / 21°C in Detroit.");
+          expect(viewModel.weatherInformation).toEqual("It is 70°F / 21°C in Detroit.");
         });
       });
 
@@ -49,7 +49,7 @@ describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
         });
 
         it("should show the error message", () => {
-          expect(viewModel.temperatureLabel).toEqual("Error getting temperature");
+          expect(viewModel.weatherInformation).toEqual("Error getting temperature");
         });
       });
     });
