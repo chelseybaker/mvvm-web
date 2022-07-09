@@ -1,6 +1,6 @@
-import MockOpenWeatherNetworker from "../../__tests__/mocks/MockOpenWeatherNetworker";
-import {LocalError, LocalErrorCode, NetworkError} from "../../errors/LocalErrors";
-import OpenWeatherDataTransformer from "./OpenWeatherDataTransformer";
+import MockOpenWeatherNetworker from "../../mocks/MockOpenWeatherNetworker";
+import {LocalError, LocalErrorCode, NetworkError} from "../../../errors/LocalErrors";
+import OpenWeatherDataTransformer from "../../../network/openWeather/OpenWeatherDataTransformer";
 
 describe("OpenWeatherDataTransformer tests", () => {
   let dataTransformer: OpenWeatherDataTransformer;

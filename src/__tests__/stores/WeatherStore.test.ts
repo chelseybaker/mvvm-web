@@ -1,7 +1,7 @@
-import {UnexpectedDataFormatError} from "../errors/LocalErrors";
-import WeatherStore from "./WeatherStore";
-import MockOpenWeatherDataTransformer from "../__tests__/mocks/MockOpenWeatherDataTransformer";
-import MockWeather from "../__tests__/mocks/MockWeather";
+import {UnexpectedDataFormatError} from "../../errors/LocalErrors";
+import WeatherStore from "../../stores/WeatherStore";
+import MockOpenWeatherDataTransformer from "../mocks/MockOpenWeatherDataTransformer";
+import MockWeather from "../mocks/MockWeather";
 
 describe("WeatherStore tests", () => {
   let weatherStore: WeatherStore;

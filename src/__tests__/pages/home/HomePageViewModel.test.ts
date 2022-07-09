@@ -1,7 +1,7 @@
-import MockGeoLocator from "../../__tests__/mocks/MockGeoLocator";
-import MockWeatherStore from "../../__tests__/mocks/MockWeatherStore";
+import MockGeoLocator from "../../mocks/MockGeoLocator";
+import MockWeatherStore from "../../mocks/MockWeatherStore";
 
-import HomePageViewModel from "./HomePageViewModel";
+import HomePageViewModel from "../../../pages/home/HomePageViewModel";
 
 describe("HomePageViewModel tests", () => {
   let viewModel: HomePageViewModel;
