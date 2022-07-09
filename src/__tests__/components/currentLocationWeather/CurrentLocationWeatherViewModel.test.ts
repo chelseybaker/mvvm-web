@@ -36,7 +36,7 @@ describe("CurrentLocationWeather viewModel tests", () => {
     describe("when permission is granted", () => {
       beforeEach(() => {
         // MockGeoLocator by default calls success, so no setup needed
-        mockWeatherStore.getWeatherForLocation = jest.fn(() => mockWeatherStore.getWeatherForLocationPromise);
+        mockWeatherStore.getWeatherForLocation = jest.fn(() => Promise.resolve(undefined));
         viewModel.getLocation();
       });
 

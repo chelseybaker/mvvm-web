@@ -2,7 +2,7 @@ import ZipCodeWeatherViewModel from "../../../components/zipCodeWeather/ZipCodeW
 import MockWeather from "../../mocks/MockWeather";
 import MockWeatherStore from "../../mocks/MockWeatherStore";
 
-describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
+describe("ZipCodeWeatherViewModel tests", () => {
   let viewModel: ZipCodeWeatherViewModel;
   let mockWeatherStore: MockWeatherStore;
 
@@ -19,6 +19,10 @@ describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
     it("should disable the weatherButton since no zip is entered", () => {
       expect(viewModel.buttonDisabled).toBeTruthy();
     });
+
+    it("should have the default weather information string", () => {
+      expect(viewModel.weatherInformation).toEqual("[Search a zip to see its weather]")
+    })
   });
 
   describe("Given a valid zip code is entered", () => {
@@ -33,7 +37,7 @@ describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
     describe("Given onClickGetWeather is clicked", () => {
       describe("when the response is successful", () => {
         beforeEach(() => {
-          mockWeatherStore.getWeatherForZipPromise = Promise.resolve(MockWeather);
+          mockWeatherStore.getWeatherForZip = jest.fn(() => Promise.resolve(MockWeather))
           viewModel.onClickGetWeather();
         });
 
@@ -44,7 +48,7 @@ describe("ZipCodeWeather ZipCodeWeatherViewModel tests", () => {
 
       describe("when the response is unsuccessful", () => {
         beforeEach(() => {
-          mockWeatherStore.getWeatherForZipPromise = Promise.reject({message: "Mock error"});
+          mockWeatherStore.getWeatherForZip = jest.fn(() => Promise.reject({message: "Mock error"}));
           viewModel.onClickGetWeather();
         });
 

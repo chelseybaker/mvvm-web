@@ -5,15 +5,12 @@ import MockWeather from "./MockWeather";
 class MockWeatherStore implements WeatherStorable {
   currentLocationWeather?: Weather;
 
-  getWeatherForLocationPromise = Promise.resolve(undefined);
-  getWeatherForZipPromise = Promise.resolve(MockWeather);
-
   getWeatherForLocation(longitude: number, latitude: number): Promise<void> {
-    return this.getWeatherForLocationPromise;
+    return Promise.resolve(undefined);
   }
 
   getWeatherForZip(zipCode: string): Promise<Weather> {
-    return this.getWeatherForZipPromise;
+    return Promise.resolve(MockWeather);
   }
 }
 
